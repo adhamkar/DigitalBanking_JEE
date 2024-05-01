@@ -97,6 +97,8 @@ public class BankAccountServiceImpl implements BankAccountService{
         accountOperation.setDescription(description);
         accountOperation.setAmount(amount);
         accountOperation.setOperationDate(new Date());
+        accountOperation.setBankAccount(bankAccount);
+        bankAccount.getAccountOperations().add(accountOperation);
         accountOperationRepository.save(accountOperation);
         bankAccount.setBalance(bankAccount.getBalance()-amount);
         bankAccountRepository.save(bankAccount);
@@ -112,8 +114,11 @@ public class BankAccountServiceImpl implements BankAccountService{
         accountOperation.setDescription(description);
         accountOperation.setAmount(amount);
         accountOperation.setOperationDate(new Date());
+        accountOperation.setBankAccount(bankAccount);
+        bankAccount.getAccountOperations().add(accountOperation);
         accountOperationRepository.save(accountOperation);
         bankAccount.setBalance(bankAccount.getBalance()+amount);
+
         bankAccountRepository.save(bankAccount);
     }
 

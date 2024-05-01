@@ -1,10 +1,9 @@
 package ma.enset.digitalbanking_backend.dtos;
 
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ma.enset.digitalbanking_backend.entities.BankAccount;
 import ma.enset.digitalbanking_backend.enums.OperationType;
 
 import java.util.Date;
