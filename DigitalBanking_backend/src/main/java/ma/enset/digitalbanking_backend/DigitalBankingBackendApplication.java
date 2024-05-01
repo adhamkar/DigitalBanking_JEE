@@ -1,5 +1,6 @@
 package ma.enset.digitalbanking_backend;
 
+import ma.enset.digitalbanking_backend.dtos.CustomerDTO;
 import ma.enset.digitalbanking_backend.entities.AccountOperation;
 import ma.enset.digitalbanking_backend.entities.CurrentAccount;
 import ma.enset.digitalbanking_backend.entities.Customer;
@@ -9,6 +10,7 @@ import ma.enset.digitalbanking_backend.enums.OperationType;
 import ma.enset.digitalbanking_backend.repositories.AccountOperationRepository;
 import ma.enset.digitalbanking_backend.repositories.BankAccountRepository;
 import ma.enset.digitalbanking_backend.repositories.CustomerRepository;
+import ma.enset.digitalbanking_backend.services.BankAccountService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,6 +25,17 @@ public class DigitalBankingBackendApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(DigitalBankingBackendApplication.class, args);
+    }
+    //@Bean
+    CommandLineRunner commandLineRunner(BankAccountService bankAccountService){
+        return args -> {
+            Stream.of("bousqla","jam3i","najib").forEach(name->{
+                CustomerDTO customer = new CustomerDTO();
+                customer.setName(name);
+                customer.setEmail(name+"@email.com");
+                bankAccountService.saveCustomer(customer);
+            });
+        };
     }
     //@Bean
     CommandLineRunner start(CustomerRepository customerRepository,
