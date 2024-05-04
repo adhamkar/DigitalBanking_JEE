@@ -1,5 +1,6 @@
 package ma.enset.digitalbanking_backend.web;
 
+import jakarta.websocket.server.PathParam;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import ma.enset.digitalbanking_backend.dtos.CustomerDTO;
@@ -12,6 +13,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @Slf4j
+@CrossOrigin("*")
 public class CustomerRestController {
     private BankAccountService bankAccountService;
     @GetMapping("/customers")
@@ -34,5 +36,9 @@ public class CustomerRestController {
     @DeleteMapping("/customers/{id}")
     public void deleteCustomer(@PathVariable Long id){
         bankAccountService.deleteCustomer(id);
+    }
+    @GetMapping("/customers/search")
+    public List<CustomerDTO> searchCustomer(@RequestParam("kw") String keyword){
+        return bankAccountService.searchCustomers("%"+keyword+"%");
     }
 }
