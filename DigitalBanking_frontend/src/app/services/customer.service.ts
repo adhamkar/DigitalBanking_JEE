@@ -18,6 +18,9 @@ export class CustomerService {
   public saveCustomer(customer : Customer){
     return this.http.post<Customer>("http://localhost:8080/customers/",customer);
   }
+  public deleteCustomer(id:number){
+    return this.http.delete<Customer>("http://localhost:8080/customers/"+id)
+  }
 
 }
 
