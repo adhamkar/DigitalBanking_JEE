@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {CustomerService} from "../services/customer.service";
 import {Customer} from "../model/customer.model";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {AccountsService} from "../services/accounts.service";
 
 @Component({
   selector: 'app-customers',
@@ -13,7 +14,8 @@ export class CustomersComponent implements OnInit{
   customers! : Array<Customer>;
   errorMessage! : string;
   searchFormGroup! : FormGroup;
-  constructor(private customerService:CustomerService,private fb : FormBuilder) {
+  constructor(private customerService:CustomerService,private fb : FormBuilder
+  ) {
   }
 
   ngOnInit(): void {
