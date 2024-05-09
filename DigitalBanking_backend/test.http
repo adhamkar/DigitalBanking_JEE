@@ -1,0 +1,9 @@
+POST http://localhost:8080/auth/login
+Content-Type: application/x-www-form-urlencoded
+
+username=admin&password=12345
+
+###
+GET http://localhost:8080/customers
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcxNTI3MTIxOCwiaWF0IjoxNzE1MjcwNjE4LCJzY29wZSI6IkFETUlOIFVTRVIifQ.YTq1iXRlIlDwRQixhNpuL87exmHxGlfV0Zyt_PsJpgoYMwQDTx_URZnrlrY0l-wktcOjWsQ-6vm4puSG282nIg

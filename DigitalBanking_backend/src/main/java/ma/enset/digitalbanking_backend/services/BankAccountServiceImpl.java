@@ -10,11 +10,13 @@ import ma.enset.digitalbanking_backend.mappers.BankAccountMapperImpl;
 import ma.enset.digitalbanking_backend.repositories.AccountOperationRepository;
 import ma.enset.digitalbanking_backend.repositories.BankAccountRepository;
 import ma.enset.digitalbanking_backend.repositories.CustomerRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -170,6 +172,31 @@ public class BankAccountServiceImpl implements BankAccountService{
         accountHistoryDTO.setCurrentPage(page);
         accountHistoryDTO.setTotalPages(accountOperation.getTotalPages());
         return accountHistoryDTO;
+    }
+    @Override
+    public List<BankAccountDTO> getBankAccountsByCustomer(Long customerId){
+        List<BankAccountDTO> bankAccounts = new ArrayList<>();
+        CustomerDTO customerDTO = bankAccountMapper.fromCustomer(customerRepository.findById(customerId).get());
+        List<CurrentBankAccountDTO> currentBankAccountDTOS=new ArrayList<>();
+        List<SavingBankAccountDTO> savingBankAccountDTOS=new ArrayList<>();
+        bankAccountRepository.findBankAccountsByCustomerId(customerId).forEach((bankAccount)->{
+            if (bankAccount instanceof SavingAccount){
+                SavingBankAccountDTO savingBankAccountDTO= new SavingBankAccountDTO();
+                BeanUtils.copyProperties(bankAccount,savingBankAccountDTO);
+                savingBankAccountDTO.setType("SA");
+                savingBankAccountDTO.setCustomerDTO(customerDTO);
+                savingBankAccountDTOS.add(savingBankAccountDTO);
+            }else {
+                CurrentBankAccountDTO currentBankAccountDTO= new CurrentBankAccountDTO();
+                BeanUtils.copyProperties(bankAccount,currentBankAccountDTO);
+                currentBankAccountDTO.setType("CA");
+                currentBankAccountDTO.setCustomerDTO(customerDTO);
+                currentBankAccountDTOS.add(currentBankAccountDTO);
+            }
+            bankAccounts.addAll(savingBankAccountDTOS);
+            bankAccounts.addAll(currentBankAccountDTOS);
+        });
+        return bankAccounts;
     }
 
     @Override

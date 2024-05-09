@@ -1,0 +1,24 @@
+<div class="container mt-2">
+  <div class="container mt-2">
+    <div class="card"  >
+      <div class="card-header">{{customer.name}} Accounts</div>
+      <div class="card-body">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Id</th><th>Type</th><th>Balance</th><th>Status</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let a of accounts">
+            <td>{{a.id}}</td>
+            <td>{{a.type}}</td>
+            <td>{{a.balance}}</td>
+            <td>{{a.status}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
