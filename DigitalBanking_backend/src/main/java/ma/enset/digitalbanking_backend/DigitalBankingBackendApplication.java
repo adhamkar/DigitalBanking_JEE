@@ -29,7 +29,7 @@ public class DigitalBankingBackendApplication {
     //@Bean
     CommandLineRunner commandLineRunner(BankAccountService bankAccountService){
         return args -> {
-            Stream.of("bousqla","jam3i","najib").forEach(name->{
+            Stream.of("Adham","karmadi","karima").forEach(name->{
                 CustomerDTO customer = new CustomerDTO();
                 customer.setName(name);
                 customer.setEmail(name+"@email.com");
@@ -42,7 +42,7 @@ public class DigitalBankingBackendApplication {
                             AccountOperationRepository accountOperationRepository,
                             BankAccountRepository bankAccountRepository){
         return args -> {
-            Stream.of("hamid","taha","mohammed").forEach(name->{
+            Stream.of("hamid","taha","aymane").forEach(name->{
                 Customer customer = new Customer();
                 customer.setName(name);
                 customer.setEmail(name+"@email.com");
